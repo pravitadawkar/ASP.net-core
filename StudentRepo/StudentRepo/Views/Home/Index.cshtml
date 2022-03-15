@@ -1,0 +1,47 @@
+﻿@model IEnumerable<StudentRepo.StudentData.Student>
+
+@{
+    ViewData["Title"] = "Student Information";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Addstd">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Class)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentCity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Class)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentCity)
+            </td>
+            <td>
+                <a asp-action="Editstd" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Detailstd" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Deletestd" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
