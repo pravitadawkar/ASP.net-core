@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using StudentRepo.DataBase;
 using StudentRepo.StudentData;
+using StudentRepo.EmployeeData;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,11 @@ namespace StudentRepo
             services.AddControllersWithViews();
             services.AddTransient<IStudent, StudentRepository>();
             services.AddTransient<StudentService, StudentService>();
+            
+            services.AddTransient<IEmployee, EmployeeRepository>();
+            services.AddTransient<EmployeeService, EmployeeService>();
+            services.AddControllersWithViews();
+
 
 
         }
