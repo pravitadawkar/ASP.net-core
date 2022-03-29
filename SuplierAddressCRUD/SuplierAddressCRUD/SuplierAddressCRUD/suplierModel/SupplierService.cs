@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace SuplierAddressCRUD.suplierModel
 {
-    public class SuplierService : Isuplier
+    public class SupplierService : ISupplier
     {
         ApplicationDbContext _context;
-        public SuplierService(ApplicationDbContext context)
+        public SupplierService(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -46,18 +46,16 @@ namespace SuplierAddressCRUD.suplierModel
                               Address2 = a.Address2,
                           }).FirstOrDefault();
             return result;
-
         }
-
         public void Update(SupplierDTO supplierddto)
         {
-            Suplier suplier = new Suplier();
+            Supplier suplier = new Supplier();
             suplier.Id = supplierddto.SupplierId;
             suplier.Name = supplierddto.SupplierName;
             _context.Update(suplier);
-            _context.SaveChanges();
+            //_context.SaveChanges();
 
-            Addresscs address = new Addresscs();
+            Address address = new Address();
             address.Id = supplierddto.AddressId;
             address.Suplier = suplier;
             address.Address1 = supplierddto.Address1;
@@ -70,12 +68,12 @@ namespace SuplierAddressCRUD.suplierModel
         }
         public void Insert(SupplierDTO supplierddto)
         {
-            Suplier suplier = new Suplier();
+            Supplier suplier = new Supplier();
             suplier.Name = supplierddto.SupplierName;
             _context.Add(suplier);
             _context.SaveChanges();
 
-            Addresscs address = new Addresscs();
+            Address address = new Address();
             address.Suplier = suplier;
             address.Address1 = supplierddto.Address1;
             address.Address2 = supplierddto.Address2;

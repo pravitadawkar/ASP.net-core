@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SuplierAddressCRUD.suplierModel
 {
-    public interface Isuplier
+    public interface ISupplier
     {
         public List<SupplierDTO> GetAllSuplier();
         public SupplierDTO GetSupplier(int id);

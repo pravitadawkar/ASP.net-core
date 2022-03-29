@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace SuplierAddressCRUD.suplierModel
 {
-    public class Addresscs
+    public class Address
     {
-        public Addresscs()
+        public Address()
         {
-            Suplier = new Suplier();
+            Suplier = new Supplier();
         }
         public int Id { get; set; }
         public string Address1 { get; set; }
@@ -15,6 +15,6 @@ namespace SuplierAddressCRUD.suplierModel
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
-        public virtual Suplier Suplier { get; set; }
+        public virtual Supplier Suplier { get; set; }
     }
 }

@@ -10,10 +10,10 @@ namespace SuplierAddressCRUD.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class SuplierController : ControllerBase
+    public class SupplierController : ControllerBase
     {
-        Isuplier _data;
-        public SuplierController(Isuplier data)
+        ISupplier _data;
+        public SupplierController(ISupplier data)
         {
             _data = data;
         }

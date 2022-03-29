@@ -13,8 +13,8 @@ namespace SuplierAddressCRUD.Athentication
         {
             base.OnModelCreating(builder);
         }
-        public DbSet<Suplier> supliers { get; set; }
-        public DbSet<Addresscs> addresses { get; set; }
+        public DbSet<Supplier> supliers { get; set; }
+        public DbSet<Address> addresses { get; set; }
         public DbSet<Products> products { get; set; }
     }
 }
