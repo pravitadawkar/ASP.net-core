@@ -7,14 +7,16 @@ namespace SuplierAddressCRUD.suplierModel
     {
         public Address()
         {
-            Suplier = new Supplier();
+            Supplier = new Supplier();
         }
+        //[ForeignKey("Supplier")]
         public int Id { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
-        public virtual Supplier Suplier { get; set; }
+        public int SupplierId { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }

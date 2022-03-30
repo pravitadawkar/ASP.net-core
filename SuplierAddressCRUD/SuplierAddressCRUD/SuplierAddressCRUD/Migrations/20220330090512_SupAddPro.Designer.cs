@@ -10,8 +10,8 @@ using SuplierAddressCRUD.Athentication;
 namespace SuplierAddressCRUD.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220328092434_Init")]
-    partial class Init
+    [Migration("20220330090512_SupAddPro")]
+    partial class SupAddPro
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -217,7 +217,7 @@ namespace SuplierAddressCRUD.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("SuplierAddressCRUD.suplierModel.Addresscs", b =>
+            modelBuilder.Entity("SuplierAddressCRUD.suplierModel.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -239,12 +239,13 @@ namespace SuplierAddressCRUD.Migrations
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SuplierId")
+                    b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SuplierId");
+                    b.HasIndex("SupplierId")
+                        .IsUnique();
 
                     b.ToTable("addresses");
                 });
@@ -259,7 +260,7 @@ namespace SuplierAddressCRUD.Migrations
                     b.Property<int>("ProductName")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SuplierId")
+                    b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
                     b.Property<int>("UnitPrice")
@@ -267,12 +268,12 @@ namespace SuplierAddressCRUD.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SuplierId");
+                    b.HasIndex("SupplierId");
 
                     b.ToTable("products");
                 });
 
-            modelBuilder.Entity("SuplierAddressCRUD.suplierModel.Suplier", b =>
+            modelBuilder.Entity("SuplierAddressCRUD.suplierModel.Supplier", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -284,7 +285,7 @@ namespace SuplierAddressCRUD.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("supliers");
+                    b.ToTable("suppliers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -338,22 +339,33 @@ namespace SuplierAddressCRUD.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SuplierAddressCRUD.suplierModel.Addresscs", b =>
+            modelBuilder.Entity("SuplierAddressCRUD.suplierModel.Address", b =>
                 {
-                    b.HasOne("SuplierAddressCRUD.suplierModel.Suplier", "Suplier")
-                        .WithMany()
-                        .HasForeignKey("SuplierId");
+                    b.HasOne("SuplierAddressCRUD.suplierModel.Supplier", "Supplier")
+                        .WithOne("Address")
+                        .HasForeignKey("SuplierAddressCRUD.suplierModel.Address", "SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Suplier");
+                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("SuplierAddressCRUD.suplierModel.Products", b =>
                 {
-                    b.HasOne("SuplierAddressCRUD.suplierModel.Suplier", "Suplier")
-                        .WithMany()
-                        .HasForeignKey("SuplierId");
+                    b.HasOne("SuplierAddressCRUD.suplierModel.Supplier", "Supplier")
+                        .WithMany("Product")
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Suplier");
+                    b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("SuplierAddressCRUD.suplierModel.Supplier", b =>
+                {
+                    b.Navigation("Address");
+
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

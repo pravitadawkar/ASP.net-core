@@ -32,7 +32,6 @@ namespace SuplierAddressCRUD.Controllers
             var result = _data.GetProduct(id);
             return Ok(result);
         }
-
         [HttpPost]
         [Route("AddProduct")]
         public IActionResult AddProduct(Products dto)
@@ -41,8 +40,7 @@ namespace SuplierAddressCRUD.Controllers
             _data.Insert(dto);
             return Ok();
         }
-
-        [HttpPost]
+       [HttpPost]
         [Route("UpdateProduct")]
         public IActionResult UpdateProduct(Products dto)
         {
@@ -57,7 +55,6 @@ namespace SuplierAddressCRUD.Controllers
 
             }
         }
-
         [HttpPost]
         [Route("DeleteProduct")]
         public IActionResult DeleteProduct(int Id)

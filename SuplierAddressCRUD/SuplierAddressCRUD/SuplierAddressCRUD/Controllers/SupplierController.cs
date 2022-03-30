@@ -31,16 +31,13 @@ namespace SuplierAddressCRUD.Controllers
             var result = _data.GetSupplier(id);
             return Ok(result);
         }
-
         [HttpPost]
         [Route("AddSupplier")]
         public IActionResult AddSupplier(SupplierDTO dto)
         {
-
-            _data.Insert(dto);
+           _data.Insert(dto);
             return Ok();
         }
-
         [HttpPost]
         [Route("UpdateSupplier")]
         public IActionResult UpdateSupplier(SupplierDTO dto)
@@ -56,7 +53,6 @@ namespace SuplierAddressCRUD.Controllers
 
             }
         }
-
         [HttpPost]
         [Route("DeleteSupplier")]
         public IActionResult DeleteSupplier(int SupplierId)

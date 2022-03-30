@@ -15,7 +15,7 @@ namespace SuplierAddressCRUD.suplierModel
         }
         public List<Products> GetAllProducts(int SupplierId)
         {
-            return _context.products.Where(p=>p.Suplier.Id== SupplierId).ToList();
+            return _context.products.Where(p=>p.Supplier.Id== SupplierId).ToList();
         }
         public Products GetProduct(int id)
         {

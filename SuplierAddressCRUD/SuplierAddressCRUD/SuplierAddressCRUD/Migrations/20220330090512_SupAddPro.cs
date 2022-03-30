@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SuplierAddressCRUD.Migrations
 {
-    public partial class Init : Migration
+    public partial class SupAddPro : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,7 +47,7 @@ namespace SuplierAddressCRUD.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "supliers",
+                name: "suppliers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -56,7 +56,7 @@ namespace SuplierAddressCRUD.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_supliers", x => x.Id);
+                    table.PrimaryKey("PK_suppliers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,17 +176,17 @@ namespace SuplierAddressCRUD.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SuplierId = table.Column<int>(type: "int", nullable: true)
+                    SupplierId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_addresses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_addresses_supliers_SuplierId",
-                        column: x => x.SuplierId,
-                        principalTable: "supliers",
+                        name: "FK_addresses_suppliers_SupplierId",
+                        column: x => x.SupplierId,
+                        principalTable: "suppliers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,23 +197,24 @@ namespace SuplierAddressCRUD.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductName = table.Column<int>(type: "int", nullable: false),
                     UnitPrice = table.Column<int>(type: "int", nullable: false),
-                    SuplierId = table.Column<int>(type: "int", nullable: true)
+                    SupplierId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_products_supliers_SuplierId",
-                        column: x => x.SuplierId,
-                        principalTable: "supliers",
+                        name: "FK_products_suppliers_SupplierId",
+                        column: x => x.SupplierId,
+                        principalTable: "suppliers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_addresses_SuplierId",
+                name: "IX_addresses_SupplierId",
                 table: "addresses",
-                column: "SuplierId");
+                column: "SupplierId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -255,9 +256,9 @@ namespace SuplierAddressCRUD.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_products_SuplierId",
+                name: "IX_products_SupplierId",
                 table: "products",
-                column: "SuplierId");
+                column: "SupplierId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -290,7 +291,7 @@ namespace SuplierAddressCRUD.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "supliers");
+                name: "suppliers");
         }
     }
 }

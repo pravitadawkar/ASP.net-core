@@ -7,8 +7,8 @@ namespace SuplierAddressCRUD.suplierModel
     {
         public List<SupplierDTO> GetAllSuplier();
         public SupplierDTO GetSupplier(int id);
-        public void Insert(SupplierDTO suplier);
-        public void Update(SupplierDTO suplier);
-        public void Delete(int suplier);
+        public void Insert(SupplierDTO supplier);
+        public void Update(SupplierDTO supplier);
+        public void Delete(int supplier);
     }
 }

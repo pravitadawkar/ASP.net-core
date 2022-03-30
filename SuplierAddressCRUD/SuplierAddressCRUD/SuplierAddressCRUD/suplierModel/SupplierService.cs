@@ -14,8 +14,8 @@ namespace SuplierAddressCRUD.suplierModel
         }
         public List<SupplierDTO> GetAllSuplier()
         {
-            var result = (from s in _context.supliers
-                          join a in _context.addresses on s.Id equals a.Suplier.Id
+            var result = (from s in _context.suppliers
+                          join a in _context.addresses on s.Id equals a.Supplier.Id
                           select new SupplierDTO
                           {
                               AddressId = a.Id,
@@ -31,8 +31,8 @@ namespace SuplierAddressCRUD.suplierModel
         }
         public SupplierDTO GetSupplier(int id)
         {
-            var result = (from s in _context.supliers
-                          join a in _context.addresses on s.Id equals a.Suplier.Id
+            var result = (from s in _context.suppliers
+                          join a in _context.addresses on s.Id equals a.Supplier.Id
                           where s.Id == id
                           select new SupplierDTO
                           {
@@ -49,15 +49,15 @@ namespace SuplierAddressCRUD.suplierModel
         }
         public void Update(SupplierDTO supplierddto)
         {
-            Supplier suplier = new Supplier();
-            suplier.Id = supplierddto.SupplierId;
-            suplier.Name = supplierddto.SupplierName;
-            _context.Update(suplier);
+            Supplier supplier = new Supplier();
+            supplier.Id = supplierddto.SupplierId;
+            supplier.Name = supplierddto.SupplierName;
+            _context.Update(supplier);
             //_context.SaveChanges();
 
             Address address = new Address();
             address.Id = supplierddto.AddressId;
-            address.Suplier = suplier;
+            address.Supplier = supplier;
             address.Address1 = supplierddto.Address1;
             address.Address2 = supplierddto.Address2;
             address.City = supplierddto.City;
@@ -68,13 +68,13 @@ namespace SuplierAddressCRUD.suplierModel
         }
         public void Insert(SupplierDTO supplierddto)
         {
-            Supplier suplier = new Supplier();
-            suplier.Name = supplierddto.SupplierName;
-            _context.Add(suplier);
+            Supplier supplier = new Supplier();
+            supplier.Name = supplierddto.SupplierName;
+            _context.Add(supplier);
             _context.SaveChanges();
 
             Address address = new Address();
-            address.Suplier = suplier;
+            address.Supplier = supplier;
             address.Address1 = supplierddto.Address1;
             address.Address2 = supplierddto.Address2;
             address.City = supplierddto.City;
@@ -85,14 +85,14 @@ namespace SuplierAddressCRUD.suplierModel
         }
         public void Delete(int SupplierId)
         {
-            var Address = _context.addresses.Where(s => s.Suplier.Id == SupplierId).FirstOrDefault();
+            var Address = _context.addresses.Where(s => s.Supplier.Id == SupplierId).FirstOrDefault();
 
             if (Address != null)
             {
                 _context.Remove(Address);
                 _context.SaveChanges();
             }
-            var supplier = _context.supliers.Where(s => s.Id == SupplierId).FirstOrDefault();
+            var supplier = _context.suppliers.Where(s => s.Id == SupplierId).FirstOrDefault();
 
             if (supplier != null)
             {
